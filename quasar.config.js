@@ -24,7 +24,7 @@ module.exports = configure(function (ctx) {
     // https://v2.quasar.dev/quasar-cli-webpack/boot-files
     boot: [
       'supabase',
-      'i18n',
+      //'i18n',
       'axios',
     ],
 
@@ -80,7 +80,7 @@ module.exports = configure(function (ctx) {
       server: {
         type: 'http'
       },
-      port: 4000,
+      port: 8080,
       open: true // opens browser window automatically
     },
 

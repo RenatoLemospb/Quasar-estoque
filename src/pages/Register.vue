@@ -30,14 +30,13 @@
        </div>
      </div>
    </q-form>
-
   </q-page>
 </template>
 
 <script>
 import { defineComponent,ref } from 'vue'
 import useAuthUser from 'src/composables/UseAuthUser'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'PageRegister',
@@ -45,17 +44,17 @@ export default defineComponent({
     const router = useRouter()
     const {register} = useAuthUser()
 
-    const form = ref ( {
+    const form = ref({
       name: '',
       email:'',
       password: ''
-    } )
+    })
      const handleRegister = async () => {
        try {
-         await register(form.Value)
+         await register(form.value)
          router.push({
           name: 'email-confirmation',
-          query: { email: form.Value.email }
+          query: { email: form.value.email }
          })
        } catch (error) {
          alert(error)

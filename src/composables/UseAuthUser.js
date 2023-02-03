@@ -26,14 +26,18 @@ export default function useAuthUser () {
     return !!user.value
   }
 
-  const register = async ({ email, password, ...meta}) => {
-    const {user, error} = await supabase.auth.signUp(
-      { email, password},
+  const register = async ({ email, password, ...meta }) => {
+    const { user, error } = await supabase.auth.signUp(
+      { email, password },
       {
-       data: meta,
-       redirectTo: '${window.location.origin}/me?fromEmail=registrationConfirmation'
-      }
-    )
+        // arbitrary meta data is passed as the second argument under a data key
+        // to the Supabase signUp method
+        data: meta,
+        // the to redirect to after the user confirms their email
+        // window.location wouldn't be available if we were rendering server side
+        // but since we're all on the client it will work fine
+        redirectTo: `${window.location.origin}/me?fromEmail=registrationConfirmation"`
+      })
     if (error) throw error
     return user
   }
